@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense &amp; Budget Visualizer</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="page-header">
+      <h1>Expense &amp; Budget Visualizer</h1>
+      <button id="theme-toggle" class="btn-theme" aria-label="Toggle theme">🌙 Dark Mode</button>
+    </header>
+
+    <div id="balance-card" class="card">
+      <span class="balance-label">TOTAL BALANCE</span>
+      <span id="total-amount">$0.00</span>
+    </div>
+
+    <main>
+      <!-- Input Form -->
+      <section id="form-section" class="card">
+        <h2>Add Transaction</h2>
+        <form id="transaction-form" novalidate>
+          <div class="form-group">
+            <label for="item-name">Item Name</label>
+            <input id="item-name" type="text" placeholder="Item Name" autocomplete="off" />
+          </div>
+          <div class="form-group">
+            <label for="item-amount">Amount</label>
+            <input id="item-amount" type="number" placeholder="Amount" min="0.01" step="0.01" />
+          </div>
+          <div class="form-group">
+            <label for="item-category">Category</label>
+            <select id="item-category">
+              <option value="">-- Select Category --</option>
+              <option value="Food">Food</option>
+              <option value="Transport">Transport</option>
+              <option value="Fun">Fun</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="item-date">Date</label>
+            <input id="item-date" type="date" />
+          </div>
+          <span id="error-message" role="alert" aria-live="polite"></span>
+          <button type="submit" class="btn-primary">Add Transaction</button>
+        </form>
+      </section>
+
+      <div class="dashboard-grid">
+        <div class="column-left">
+          <!-- Monthly Summary -->
+          <section id="summary-section" class="card">
+            <h2>Monthly Summary</h2>
+            <div id="monthly-summary-list"></div>
+          </section>
+
+          <!-- Transaction List -->
+          <section id="list-section" class="card">
+            <div class="list-header">
+              <h2>Transactions</h2>
+              <div class="sort-container">
+                <label for="sort-select">Sort by:</label>
+                <select id="sort-select">
+                  <option value="date-desc">Date (Newest)</option>
+                  <option value="date-asc">Date (Oldest)</option>
+                  <option value="amount-desc">Amount (High to Low)</option>
+                  <option value="amount-asc">Amount (Low to High)</option>
+                  <option value="category-asc">Category (A-Z)</option>
+                </select>
+              </div>
+            </div>
+            <ul id="transaction-list" aria-label="Transaction list"></ul>
+          </section>
+        </div>
+
+        <div class="column-right">
+          <!-- Spending Chart -->
+          <section id="chart-section" class="card">
+            <h2>Spending by Category</h2>
+            <div class="chart-container">
+              <canvas id="spending-chart" aria-label="Spending by category"></canvas>
+              <p id="chart-empty-state" hidden>No transactions yet. Add one above!</p>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
